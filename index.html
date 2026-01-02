@@ -1,12 +1,705 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeepLogic AI</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#2b165d" />
+  <meta name="description" content="DeepLogic AI × CIC — Alumni Meet 2026. Explore our story, CIC alumni at DLAI, and projects. Connect in one tap." />
+  <title>DeepLogic AI × CIC — Alumni Meet 2026</title>
+
+  <style>
+    :root{
+      --bg:#0b0716;
+      --card:rgba(255,255,255,.07);
+      --card2:rgba(255,255,255,.05);
+      --line:rgba(255,255,255,.12);
+      --text:#f5f3ff;
+      --muted:rgba(245,243,255,.76);
+      --muted2:rgba(245,243,255,.56);
+      --accent:#a46bff;
+      --accent2:#ff5bd5;
+      --shadow:0 18px 60px rgba(0,0,0,.35);
+      --shadow2:0 10px 26px rgba(0,0,0,.22);
+      --r:18px;
+      --r2:22px;
+      --tap:52px;
+      --max:960px;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+    [data-theme="light"]{
+      --bg:#fbf8ff;
+      --card:rgba(34,14,86,.06);
+      --card2:rgba(34,14,86,.04);
+      --line:rgba(34,14,86,.12);
+      --text:#151228;
+      --muted:rgba(21,18,40,.76);
+      --muted2:rgba(21,18,40,.56);
+      --shadow:0 18px 60px rgba(40,22,90,.12);
+      --shadow2:0 10px 26px rgba(40,22,90,.10);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(900px 520px at 15% 10%, rgba(164,107,255,.20), transparent 60%),
+        radial-gradient(900px 520px at 85% 20%, rgba(255,91,213,.14), transparent 60%),
+        linear-gradient(180deg, var(--bg), var(--bg));
+      padding-bottom: 88px;
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
+
+    /* Top bar */
+    .top{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.12));
+      border-bottom:1px solid var(--line);
+    }
+    [data-theme="light"] .top{
+      background: linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.50));
+    }
+    .topRow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0}
+    .brand{display:flex;align-items:center;gap:10px;min-width:0}
+    .logoMark{
+      width:40px;height:40px;border-radius:14px;
+      display:grid;place-items:center;font-weight:900;
+      background: linear-gradient(135deg, rgba(164,107,255,.95), rgba(255,91,213,.55));
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow:var(--shadow2);
+      flex:0 0 auto;
+    }
+    .btxt{min-width:0;line-height:1.1}
+    .btxt b{display:block;font-size:13px;letter-spacing:.2px}
+    .btxt span{display:block;font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+    .btn{
+      height:40px;
+      padding:0 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background: var(--card2);
+      color:var(--text);
+      font-weight:900;
+      font-size:12px;
+      display:inline-flex;align-items:center;gap:8px;
+      cursor:pointer; user-select:none;
+    }
+    .btn:active{transform: translateY(1px)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(164,107,255,.75), rgba(255,91,213,.38));
+      border-color: rgba(255,255,255,.18);
+      box-shadow: var(--shadow2);
+    }
+
+    /* Hero */
+    header{padding:16px 0 10px}
+    .hero{
+      border:1px solid var(--line);
+      border-radius: var(--r2);
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      box-shadow: var(--shadow);
+      padding:16px;
+    }
+    .kicker{
+      display:inline-flex;gap:8px;align-items:center;
+      font-size:12px;color:var(--muted);
+      padding:8px 10px;border-radius:999px;border:1px solid var(--line);
+      background: rgba(0,0,0,.12);
+    }
+    [data-theme="light"] .kicker{background: rgba(255,255,255,.7)}
+    h1{margin:12px 0 8px;font-size:28px;line-height:1.12;letter-spacing:-.4px}
+    .sub{margin:0;color:var(--muted);font-size:14px;line-height:1.55}
+
+    /* Section blocks */
+    section{padding:14px 0}
+    .card{
+      border:1px solid var(--line);
+      border-radius: var(--r);
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      box-shadow: var(--shadow2);
+      padding:14px;
+    }
+    .titleRow{
+      display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-bottom:10px
+    }
+    .titleRow b{font-size:15px}
+    .titleRow span{font-size:12px;color:var(--muted)}
+    .p{margin:0;color:var(--muted);font-size:13px;line-height:1.6}
+
+    .grid{display:grid;grid-template-columns:1fr;gap:10px}
+    @media (min-width:860px){
+      body{padding-bottom: 96px}
+      h1{font-size:34px}
+      .grid.two{grid-template-columns:1fr 1fr}
+    }
+
+    /* Tabs */
+    .tabs{
+      display:flex; gap:8px; flex-wrap:wrap;
+      margin-top:12px;
+    }
+    .tab{
+      height:40px; padding:0 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: var(--card2);
+      font-weight:950; font-size:12px;
+      cursor:pointer;
+    }
+    .tab.active{
+      background: linear-gradient(135deg, rgba(164,107,255,.30), rgba(255,91,213,.18));
+      box-shadow: var(--shadow2);
+      border-color: rgba(255,255,255,.18);
+    }
+
+    /* Poster images */
+    .poster{
+      border-radius: 18px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.08);
+      box-shadow: var(--shadow2);
+    }
+    .poster img{width:100%;height:auto}
+    .hint{margin-top:8px;color:var(--muted2);font-size:12px;line-height:1.45}
+
+    /* Pills */
+    .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .pill{
+      font-size:11px;padding:7px 9px;border-radius:999px;
+      border:1px solid var(--line);background: rgba(255,255,255,.03);color:var(--muted);
+    }
+
+    /* Social link buttons (with icons) */
+    .linkBtn{
+      height:44px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: var(--card2);
+      padding:0 12px;
+      display:flex;align-items:center;justify-content:space-between;
+      font-weight:950;font-size:13px;
+      cursor:pointer;
+      gap:10px;
+    }
+    .lleft{display:flex;align-items:center;gap:10px;min-width:0}
+    .ico{
+      width:30px;height:30px;border-radius:10px;
+      display:grid;place-items:center;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      flex:0 0 auto;
+      font-size:16px;
+    }
+    .ltext{min-width:0}
+    .ltext div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .linkBtn small{color:var(--muted);font-weight:900}
+
+    /* Projects row (swipe) */
+    .hscroll{
+      display:flex; gap:10px; overflow:auto; padding-bottom:4px;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .proj{
+      min-width: 270px;
+      scroll-snap-align:start;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      box-shadow: var(--shadow2);
+      padding:14px;
+    }
+    .proj b{display:block;font-size:14px;margin-bottom:4px}
+    .proj small{display:block;color:var(--muted2);font-size:11px;margin-bottom:10px}
+    .thumb{
+      border-radius:14px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.10);
+      margin-bottom:10px;
+      aspect-ratio: 16 / 9;
+    }
+    .thumb img{width:100%;height:100%;object-fit:cover}
+    .proj p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}
+
+    /* Accordions */
+    details{
+      border:1px solid var(--line);
+      border-radius: var(--r);
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      box-shadow: var(--shadow2);
+      padding:10px 12px;
+    }
+    details + details{margin-top:10px}
+    summary{
+      cursor:pointer; list-style:none;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
+      font-weight:950; font-size:14px;
+      padding:6px 4px;
+    }
+    summary::-webkit-details-marker{display:none}
+    .content{padding:10px 4px 2px;color:var(--muted);font-size:13px;line-height:1.6}
+
+    /* Bottom nav */
+    .bottomNav{
+      position:fixed; left:0; right:0; bottom:0;
+      z-index:30;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.60));
+      border-top:1px solid var(--line);
+      padding:10px 10px 12px;
+    }
+    [data-theme="light"] .bottomNav{
+      background: linear-gradient(180deg, rgba(255,255,255,.52), rgba(255,255,255,.90));
+    }
+    .navRow{
+      max-width: var(--max);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:10px;
+      padding:0 6px;
+    }
+    .navBtn{
+      height:44px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: var(--card2);
+      color:var(--text);
+      font-weight:950;
+      font-size:12px;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      gap:3px;
+      cursor:pointer; user-select:none;
+    }
+    .navBtn small{font-size:10px;color:var(--muted);font-weight:900}
+    .navBtn.active{
+      background: linear-gradient(135deg, rgba(164,107,255,.25), rgba(255,91,213,.16));
+      box-shadow: var(--shadow2);
+    }
+
+    /* Toast */
+    .toast{
+      position:fixed; left:50%; bottom:92px; transform:translateX(-50%);
+      padding:10px 12px; border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.75);
+      color:var(--text);
+      font-size:12px;
+      box-shadow: var(--shadow2);
+      opacity:0; pointer-events:none;
+      transition:.25s opacity,.25s transform;
+      z-index:40;
+    }
+    [data-theme="light"] .toast{background: rgba(255,255,255,.92)}
+    .toast.show{opacity:1; transform:translateX(-50%) translateY(-2px)}
+  </style>
 </head>
-<body>
-    <h1>Hello World!</h1>
-    <p>Coming Soon...</p>
+
+<!-- ✅ Default theme set to LIGHT -->
+<body data-theme="light">
+  <div class="top">
+    <div class="wrap">
+      <div class="topRow">
+        <a class="brand" href="#intro" aria-label="DeepLogic AI × CIC">
+          <div class="logoMark">DL</div>
+          <div class="btxt">
+            <b>DeepLogic AI × CIC</b>
+            <span>Alumni Meet 2026</span>
+          </div>
+        </a>
+        <div style="display:flex;gap:10px;align-items:center">
+          <button class="btn" id="themeBtn" title="Toggle theme">🌗</button>
+          <button class="btn primary" id="quickWA">💬 WhatsApp</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header class="wrap">
+    <div class="hero">
+      <div class="kicker">From CIC roots to global builds.</div>
+      <h1>Welcome to CIC Alumni Meet 2026 by DeepLogicAI</h1>
+      <p class="sub">Explore our story, CIC alumni at DLAI, and what we build — then connect in one tap.</p>
+
+      <div class="tabs" role="tablist" aria-label="Sections">
+        <button class="tab active" data-tab="intro">Intro</button>
+        <button class="tab" data-tab="alumni">CIC Alumni</button>
+        <button class="tab" data-tab="projects">Projects</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- ===================== INTRO ===================== -->
+    <section id="intro" data-section="intro">
+      <div class="card">
+
+        <div class="poster">
+          <img loading="lazy" src="assets/posters/poster-1-intro.png" alt="Intro poster" />
+        </div>
+        <div class="row" style="margin-top:14px">
+          <span class="pill">AI + Full-stack</span>
+          <span class="pill">Products + Consulting</span>
+          <span class="pill">Build • Deploy • Scale</span>
+        </div>
+
+        <div style="height:10px"></div>
+
+        <details>
+          <summary>Our story <span style="color:var(--muted);font-size:12px;font-weight:900">how DLAI started</span></summary>
+          <div class="content">
+            <p class="p">
+              A group of CIC students wanted to build something of their own in the final year — we explored ideas, built early prototypes, but couldn’t push it to the finish line then.
+              After graduation, everyone joined different companies, but we kept talking about the unfinished dreams and the projects we wanted to ship.
+              Eventually, that push turned into action — the founders committed fully, left comfortable roles, and started DeepLogic AI.
+              We began with one revenue stream, grew cashflow, and then scaled into multiple client engagements and in-house products.
+              Today, we keep the same mindset: stay curious, build with intent, and ship real systems that solve real problems.
+            </p>
+          </div>
+        </details>
+
+        <details>
+          <summary>About CIC <span style="color:var(--muted);font-size:12px;font-weight:900">a student view</span></summary>
+          <div class="content">
+            <p class="p">
+              CIC is known for its interdisciplinary learning, freedom to explore, and a strong maker culture — where students blend math, computing, research, and real-world problem solving.
+            </p>
+            <div class="row">
+              <a class="btn" href="https://harshitjoshi.com/blog/undergrad_cic/" target="_blank" rel="noopener">Read: CIC by a student</a>
+            </div>
+          </div>
+        </details>
+
+        <div style="height:12px"></div>
+        <div class="titleRow" style="margin-bottom:8px">
+          <b>Geographical presence of DLAI</b>
+          <span>teams & clients</span>
+        </div>
+        <div class="poster">
+          <img loading="lazy" src="assets/geo/dlai-geo-presence.png" alt="DeepLogic AI geographical presence map" />
+        </div>
+
+        <!-- ✅ Social links with icons -->
+        <div style="height:14px"></div>
+        <div class="grid two">
+          <div class="card" style="padding:12px">
+            <b style="font-size:14px">CIC</b>
+            <div style="height:10px"></div>
+            <a class="linkBtn" href="http://cic.du.ac.in/" target="_blank" rel="noopener">
+              <div class="lleft">
+                <div class="ico">🏛️</div>
+                <div class="ltext"><div>Cluster Innovation Centre</div></div>
+              </div>
+              <small>website</small>
+            </a>
+            <div style="height:10px"></div>
+            <a class="linkBtn" href="http://cic.du.ac.in/?People/Faculty-Members" target="_blank" rel="noopener">
+              <div class="lleft">
+                <div class="ico">👩‍🏫</div>
+                <div class="ltext"><div>Faculty members</div></div>
+              </div>
+              <small>page</small>
+            </a>
+          </div>
+
+          <div class="card" style="padding:12px">
+            <b style="font-size:14px">DeepLogic AI</b>
+            <div style="height:10px"></div>
+            <a class="linkBtn" href="https://www.deeplogicai.tech" target="_blank" rel="noopener">
+              <div class="lleft">
+                <div class="ico">🌐</div>
+                <div class="ltext"><div>Website</div></div>
+              </div>
+              <small>deeplogicai.tech</small>
+            </a>
+            <div style="height:10px"></div>
+            <a class="linkBtn" href="https://www.linkedin.com/company/deeplogicai/" target="_blank" rel="noopener">
+              <div class="lleft">
+                <div class="ico">in</div>
+                <div class="ltext"><div>LinkedIn</div></div>
+              </div>
+              <small>@deeplogicai</small>
+            </a>
+            <div style="height:10px"></div>
+            <a class="linkBtn" href="https://www.instagram.com/deeplogicai/" target="_blank" rel="noopener">
+              <div class="lleft">
+                <div class="ico">📷</div>
+                <div class="ltext"><div>Instagram</div></div>
+              </div>
+              <small>@deeplogicai</small>
+            </a>
+          </div>
+        </div>
+
+        <div style="height:12px"></div>
+        <button class="btn primary" style="width:100%;height:var(--tap);border-radius:16px" id="waIntro">
+          💬 Contact DeepLogic AI
+          <span style="margin-left:auto;color:rgba(255,255,255,.85);font-weight:950">WhatsApp</span>
+        </button>
+        <div class="hint">Opens WhatsApp with a pre-filled message.</div>
+      </div>
+    </section>
+
+    <!-- ===================== ALUMNI ===================== -->
+    <section id="alumni" data-section="alumni" hidden>
+      <div class="card">
+        <div class="titleRow">
+          <b>CIC Alumni at DeepLogic AI</b>
+          <span>people & opportunities</span>
+        </div>
+
+        <div class="poster">
+          <img loading="lazy" src="assets/posters/poster-2-alumni.png" alt="CIC Alumni at DeepLogic AI poster" />
+        </div>
+
+        <div style="height:12px"></div>
+        <p class="p">
+          DeepLogic AI actively nurtures CIC talent — alumni, interns, and collaborators who enjoy end-to-end ownership and real delivery.
+          If you’re from CIC and want to build, research, or ship products with a small high-ownership team, we’d love to connect.
+        </p>
+
+        <!-- ✅ Removed “CIC folks at DLAI” grid (poster already covers it) -->
+
+        <div style="height:14px"></div>
+        <div class="grid two">
+          <div class="card" style="padding:12px">
+            <b style="font-size:14px">Careers</b>
+            <p class="p" style="margin-top:8px">Development • Research • Product/Management • Internships</p>
+            <div class="row">
+              <a class="btn primary" style="height:44px;border-radius:14px" href="https://wiki.deeplogicai.tech/s/deeplogicai-career-opportunities" target="_blank" rel="noopener">
+                🚀 Open hiring page
+              </a>
+            </div>
+          </div>
+          <div class="card" style="padding:12px">
+            <b style="font-size:14px">Collaboration</b>
+            <p class="p" style="margin-top:8px">Projects, research, workshops, mentoring, or talks — open to collaborating with CIC ecosystem.</p>
+            <div class="row">
+              <button class="btn" style="height:44px;border-radius:14px" id="waAlumni">
+                🤝 WhatsApp for collaboration
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div style="height:12px"></div>
+        <button class="btn primary" style="width:100%;height:var(--tap);border-radius:16px" id="waHire">
+          💬 Contact for hiring / internships
+          <span style="margin-left:auto;color:rgba(255,255,255,.85);font-weight:950">WhatsApp</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ===================== PROJECTS ===================== -->
+    <section id="projects" data-section="projects" hidden>
+      <div class="card">
+        <div class="titleRow">
+          <b>Projects & Capabilities</b>
+          <span>what we build</span>
+        </div>
+
+        <div class="poster">
+          <img loading="lazy" src="assets/posters/poster-3-projects.png" alt="Projects & capabilities poster" />
+        </div>
+
+        <div style="height:12px"></div>
+        <b style="font-size:14px">Featured builds (swipe)</b>
+        <div style="height:10px"></div>
+        <div class="hscroll" id="projectsRow"></div>
+
+        <div style="height:14px"></div>
+        <details>
+          <summary>What we do end-to-end <span style="color:var(--muted);font-size:12px;font-weight:900">capabilities</span></summary>
+          <div class="content">
+            <ul style="margin:8px 0 0;padding-left:18px;color:var(--muted);font-size:13px;line-height:1.6">
+              <li><b>AI-Powered Document Intelligence (IDP):</b> extraction, validation, workflows, ops tooling</li>
+              <li><b>Knowledge Systems & RAG Platforms:</b> search + grounded answers with citations & controls</li>
+              <li><b>GenAI Products & Creative Systems:</b> copilots, agents, automation tools</li>
+              <li><b>End-to-End Full-Stack Engineering:</b> frontend, backend, integrations, DevOps</li>
+              <li><b>Secure, scalable deployments:</b> privacy-minded design, access controls, observability</li>
+            </ul>
+          </div>
+        </details>
+
+        <div style="height:12px"></div>
+        <button class="btn primary" style="width:100%;height:var(--tap);border-radius:16px" id="waProjects">
+          💼 Contact for projects / partnerships
+          <span style="margin-left:auto;color:rgba(255,255,255,.85);font-weight:950">WhatsApp</span>
+        </button>
+      </div>
+    </section>
+
+    <section style="padding-top:0">
+      <div class="card" style="padding:12px">
+        <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center">
+          <div>
+            <b>DeepLogic AI</b><br/>
+            <span style="color:var(--muted);font-size:12px">fast-reply@deeplogicai.tech • +91-9873006032</span>
+          </div>
+          <button class="btn" id="copyEmail" title="Copy email"><span class="mono">Copy email</span></button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Bottom nav -->
+  <div class="bottomNav" aria-label="Bottom navigation">
+    <div class="navRow">
+      <button class="navBtn active" data-go="intro"><span>🏠</span><small>Intro</small></button>
+      <button class="navBtn" data-go="alumni"><span>🎓</span><small>Alumni</small></button>
+      <button class="navBtn" data-go="projects"><span>🧩</span><small>Projects</small></button>
+      <button class="navBtn" id="navWA"><span>💬</span><small>WhatsApp</small></button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Copied</div>
+
+  <script>
+    const CONFIG = {
+      email: "fast-reply@deeplogicai.tech",
+      phoneE164: "919873006032"
+    };
+
+    const PROJECTS = [
+      { title:"Document Intelligence Platform", sub:"PDF → structured data & workflows", img:"idp.png",
+        desc:"Automates document-heavy operations with extraction, validation, and ops-ready workflows.",
+        tags:["IDP","OCR/ML","Automation"], link:"#"
+      },
+      { title:"Enterprise Knowledge Search + Document Chat", sub:"Search across docs & email + grounded answers", img:"rag.png",
+        desc:"RAG-based knowledge access with context, citations, and practical controls.",
+        tags:["RAG","Search","Security"], link:"#"
+      },
+      { title:"GenAI Creative Studio", sub:"Turn photos into comic stories", img:"genai.png",
+        desc:"Creative GenAI tooling for visual storytelling and structured content creation.",
+        tags:["GenAI","Creative","Automation"], link:"#"
+      },
+      { title:"Applied AI Healthcare Product (EmbryoInsight AI)", sub:"Image assistant for quality assessment & guidance", img:"embryo.png",
+        desc:"Applied ML + computer vision to support healthcare imaging workflows with user-friendly guidance.",
+        tags:["ML","CV","Healthcare"], link:"#"
+      },
+      { title:"Intelligent Surveillance", sub:"Real-time alerts & anomaly detection", img:"surveillance.png",
+        desc:"Video analytics for safety/compliance with real-time detection and alerting pipelines.",
+        tags:["Computer Vision","Realtime","Alerts"], link:"#"
+      }
+    ];
+
+    const $ = (q, el=document) => el.querySelector(q);
+    const $$ = (q, el=document) => Array.from(el.querySelectorAll(q));
+
+    const toast = (msg="Done") => {
+      const t = $("#toast");
+      t.textContent = msg;
+      t.classList.add("show");
+      clearTimeout(window.__t);
+      window.__t = setTimeout(()=>t.classList.remove("show"), 1100);
+    };
+
+    function waLink(message){
+      return `https://wa.me/${CONFIG.phoneE164}?text=${encodeURIComponent(message)}`;
+    }
+
+    async function copyText(text){
+      try{ await navigator.clipboard.writeText(text); toast("Copied ✅"); }
+      catch(e){
+        const ta = document.createElement("textarea");
+        ta.value = text; document.body.appendChild(ta);
+        ta.select(); document.execCommand("copy"); ta.remove();
+        toast("Copied ✅");
+      }
+    }
+
+    /* ✅ Default theme = light (set in <body data-theme="light">)
+       Keep preference if user toggles */
+    const savedTheme = localStorage.getItem("dlai_theme");
+    if(savedTheme) document.body.setAttribute("data-theme", savedTheme);
+
+    $("#themeBtn").addEventListener("click", ()=>{
+      const cur = document.body.getAttribute("data-theme") || "light";
+      const nxt = cur === "dark" ? "light" : "dark";
+      document.body.setAttribute("data-theme", nxt);
+      localStorage.setItem("dlai_theme", nxt);
+    });
+
+    // Render projects
+    const projectsRow = $("#projectsRow");
+    PROJECTS.forEach(pr=>{
+      const el = document.createElement("div");
+      el.className = "proj";
+      el.innerHTML = `
+        <b>${pr.title}</b>
+        <small>${pr.sub}</small>
+        <div class="thumb">
+          <img loading="lazy" src="assets/projects/${pr.img}" alt="${pr.title}" onerror="this.style.display='none'">
+        </div>
+        <p>${pr.desc}</p>
+        <div class="row">${pr.tags.map(t=>`<span class="pill">${t}</span>`).join("")}</div>
+        <div class="row">
+          <a class="btn primary" style="height:44px;border-radius:14px" href="${pr.link}" target="_blank" rel="noopener">Learn more</a>
+          <button class="btn" style="height:44px;border-radius:14px" data-wa="proj">WhatsApp</button>
+        </div>
+      `;
+      projectsRow.appendChild(el);
+    });
+
+    projectsRow.addEventListener("click", (e)=>{
+      const b = e.target.closest("button[data-wa='proj']");
+      if(!b) return;
+      window.location.href = waLink("Hi DeepLogic AI team, I saw your projects via the CIC Alumni Meet QR and would like to discuss a project / partnership.");
+    });
+
+    // WhatsApp CTAs
+    const msgIntro = "Hi DeepLogic AI team, I found you via the CIC Alumni Meet QR code and would love to connect.";
+    $("#quickWA").addEventListener("click", ()=> window.location.href = waLink(msgIntro));
+    $("#navWA").addEventListener("click", ()=> window.location.href = waLink(msgIntro));
+    $("#waIntro").addEventListener("click", ()=> window.location.href = waLink(msgIntro));
+    $("#waHire").addEventListener("click", ()=> window.location.href = waLink("Hi DeepLogic AI team, I’m from CIC and would love to explore hiring / internships. Can we connect?"));
+    $("#waAlumni").addEventListener("click", ()=> window.location.href = waLink("Hi DeepLogic AI team, I’m from CIC and would love to explore collaboration / opportunities."));
+    $("#waProjects").addEventListener("click", ()=> window.location.href = waLink("Hi DeepLogic AI team, I saw your projects via the CIC Alumni Meet QR and would like to discuss a project / partnership."));
+
+    // Copy email
+    $("#copyEmail").addEventListener("click", ()=>copyText(CONFIG.email));
+
+    // Tabs + Bottom nav switching
+    const setActive = (key) => {
+      $$(".tab").forEach(t=>t.classList.toggle("active", t.dataset.tab === key));
+      $$("section[data-section]").forEach(s=> s.hidden = (s.dataset.section !== key));
+      $$(".navBtn[data-go]").forEach(b=>b.classList.toggle("active", b.dataset.go === key));
+      history.replaceState(null, "", "#" + key);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    $$(".tab").forEach(t=> t.addEventListener("click", ()=>setActive(t.dataset.tab)));
+    $$(".navBtn[data-go]").forEach(b=> b.addEventListener("click", ()=>setActive(b.dataset.go)));
+
+    const initial = (location.hash || "#intro").replace("#","");
+    if(["intro","alumni","projects"].includes(initial)) setActive(initial);
+  </script>
+
+  <!-- Assets:
+    /assets
+      /posters
+        poster-1-intro.png
+        poster-2-alumni.png
+        poster-3-projects.png
+      /geo
+        dlai-geo-presence.png
+      /projects
+        idp.png
+        rag.png
+        genai.png
+        embryo.png
+        surveillance.png
+  -->
 </body>
 </html>
